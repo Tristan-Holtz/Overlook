@@ -1,9 +1,10 @@
 import Customer from './customer.js';
 
 class Manager extends Customer {
-  constructor() {
+  constructor(customerDetails) {
     super()
-    
+    this.customerDetails = customerDetails;
+    this.name = 'manager';
   }
 
   deleteBooking() {
@@ -11,8 +12,11 @@ class Manager extends Customer {
   }
 
   searchUsers() {
+    this.customerDetails.find(customer => {
 
+    })
   }
+
 }
 
 export default Manager;
