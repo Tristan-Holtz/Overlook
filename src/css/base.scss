@@ -27,6 +27,7 @@ body {
 .error-message {
   color: red;
   font-size: $login-font;
+  margin: 1%;
 }
 
 input {
@@ -37,6 +38,23 @@ input {
 
 label {
   font-size: 28px;
+}
+
+/********** MANAGER DASHBOARD **********/
+
+.main_header {
+  height: 10vh;
+  width: 100%;
+}
+
+.manager_dashboard {
+  height: 90vh;
+  width: 100%;
+}
+
+.manager_dashboard-options {
+  height: 100vh;
+  width: 40%;
 }
 
 .hidden {
