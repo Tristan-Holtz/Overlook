@@ -10,13 +10,18 @@ const generateUser = (info) => {
   if($('.login-username').val() === 'manager') {
     const manager = new Manager(info);
     const dashboard = new Dashboard(manager);
-    dashboard.generateHTML();
+    $('.error-message').hide();
+    console.log(manager);
+    $('.login-section').hide();
+    dashboard.generateHTML('manager');
   } else {
     const loginInput = parseInt($('.login-username').val().split('customer')[1]);
     const customerInfo = info.users.find(user => user.id === loginInput)
     const customer = new Customer(customerInfo.id, customerInfo.name);
     const dashboard = new Dashboard(customer);
-    dashboard.generateHTML();
+    $('.error-message').hide();
+    console.log(customer);
+    // dashboard.generateHTML();
   }
 }
 
@@ -42,7 +47,8 @@ const displayError = () => {
 }
 
 const checkPassword = () => {
-  if($(".login-username").val() && $(".login-password").val() === 'overlook2019') {
+  if($(".login-username").val() &&
+  $(".login-password").val() === 'overlook2019') {
     loginUser();
   } else {
     displayError();
