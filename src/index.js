@@ -1,13 +1,53 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
-// An example of how you import jQuery into a JS file if you use jQuery in that file
 import $ from 'jquery';
-
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
+import './images/turing-logo.png';
+import Manager from './manager.js';
+import Customer from './customer.js';
+import Dashboard from './dashboard.js';
 
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png'
 
-console.log('This is the JavaScript entry file - your code begins here.');
+const generateUser = (info) => {
+  if($('.login-username').val() === 'manager') {
+    const manager = new Manager(info);
+    const dashboard = new Dashboard(manager);
+    dashboard.generateHTML();
+  } else {
+    const loginInput = parseInt($('.login-username').val().split('customer')[1]);
+    const customerInfo = info.users.find(user => user.id === loginInput)
+    const customer = new Customer(customerInfo.id, customerInfo.name);
+    const dashboard = new Dashboard(customer);
+    dashboard.generateHTML();
+  }
+}
+
+const loginUser = () => {
+  fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users")
+    .then(response => response.json())
+    .then(data => generateUser(data))
+    .catch(error => console.log(error))
+}
+
+
+const getBookings = () => {
+  fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings")
+    .then(response => response.json())
+    .then(data => generateBookings(data))
+    .catch(error => console.log(error))
+}
+
+const displayError = () => {
+  $(".password-div").append(`
+      <p class="error-message">Incorrect username or password.</p>
+    `)
+}
+
+const checkPassword = () => {
+  if($(".login-username").val() && $(".login-password").val() === 'overlook2019') {
+    loginUser();
+  } else {
+    displayError();
+  }
+}
+
+
+$('.login-button').click(checkPassword);
