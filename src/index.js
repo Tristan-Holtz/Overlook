@@ -13,8 +13,8 @@ const generateUser = (info) => {
     dashboard = new Dashboard(manager);
     $('.error-message').hide();
     $('.login-section').hide();
-    dashboard.getBookings();
     dashboard.getRooms();
+    dashboard.getBookings();
     console.log(manager);
   } else {
     const loginInput = parseInt($('.login-username').val().split('customer')[1]);
@@ -23,6 +23,7 @@ const generateUser = (info) => {
     dashboard = new Dashboard(customer);
     $('.error-message').hide();
     $('.login-section').hide();
+    dashboard.getRooms();
     dashboard.getBookings();
     console.log(customer);
   }
