@@ -5,23 +5,26 @@ import Manager from './manager.js';
 import Customer from './customer.js';
 import Dashboard from './dashboard.js';
 
+let dashboard;
 
 const generateUser = (info) => {
   if($('.login-username').val() === 'manager') {
     const manager = new Manager(info);
-    const dashboard = new Dashboard(manager);
+    dashboard = new Dashboard(manager);
     $('.error-message').hide();
-    console.log(manager);
     $('.login-section').hide();
-    dashboard.generateHTML('manager');
+    dashboard.getBookings();
+    dashboard.getRooms();
+    console.log(manager);
   } else {
     const loginInput = parseInt($('.login-username').val().split('customer')[1]);
     const customerInfo = info.users.find(user => user.id === loginInput)
     const customer = new Customer(customerInfo.id, customerInfo.name);
-    const dashboard = new Dashboard(customer);
+    dashboard = new Dashboard(customer);
     $('.error-message').hide();
+    $('.login-section').hide();
+    dashboard.getBookings();
     console.log(customer);
-    // dashboard.generateHTML();
   }
 }
 
@@ -29,14 +32,6 @@ const loginUser = () => {
   fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users")
     .then(response => response.json())
     .then(data => generateUser(data))
-    .catch(error => console.log(error))
-}
-
-
-const getBookings = () => {
-  fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings")
-    .then(response => response.json())
-    .then(data => generateBookings(data))
     .catch(error => console.log(error))
 }
 
@@ -57,3 +52,4 @@ const checkPassword = () => {
 
 
 $('.login-button').click(checkPassword);
+$('.input_date-button').click(dashboard.filterByDate())
