@@ -11,12 +11,13 @@ class Dashboard {
 
   filterByDate(date) {
     this.rooms.forEach(room => {
+      console.log(room.number);
       this.bookings.forEach(booking => {
         if(room.number === booking.roomNumber && booking.date !== date) {
           $('.rooms_section').append(`
               <article class='rooms_section-card'>
                 <div>
-                  ${room}
+                  ${room.number}
                 </div>
               </article>
             `)
@@ -27,6 +28,18 @@ class Dashboard {
 
   filterRoom() {
 
+  }
+
+  generateRooms(roomData) {
+    this.rooms = roomData.rooms;
+    this.filterByDate(this.date);
+  }
+
+  getRooms() {
+    fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms")
+      .then(response => response.json())
+      .then(data => this.generateRooms(data))
+      .catch(error => console.log(error))
   }
 
   generateHTML(user) {
@@ -52,7 +65,6 @@ class Dashboard {
           </section>
         </section>
         `)
-      this.filterByDate(this.date);
     } else {
       $('.main_dashboard').append(`
         <header class="main_header">
@@ -77,12 +89,7 @@ class Dashboard {
 
   generateBookings(bookingData) {
     this.bookings = bookingData.bookings;
-    console.log(this.bookings);
     this.generateHTML(this.user);
-  }
-
-  generateRooms(roomData) {
-    this.rooms = roomData;
   }
 
   getBookings() {
@@ -92,12 +99,6 @@ class Dashboard {
       .catch(error => console.log(error))
   }
 
-  getRooms() {
-    fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms")
-      .then(response => response.json())
-      .then(data => this.generateRooms(data))
-      .catch(error => console.log(error))
-  }
 }
 
 export default Dashboard;
