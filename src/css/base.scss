@@ -43,20 +43,35 @@ label {
 /********** MANAGER DASHBOARD **********/
 
 .main_header {
+  border-bottom: 5px solid black;
   height: 10vh;
   width: 100%;
 }
 
 .manager_dashboard {
+  display: flex;
   height: 90vh;
   width: 100%;
 }
 
 .manager_dashboard-options {
+  border-right: 5px solid black;
   height: 100vh;
-  width: 40%;
+  padding: 2%;
+  width: 30%;
 }
 
 .hidden {
   display: none;
+}
+
+.form_manager-options {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.rooms_section {
+  padding: 1%;
+  width: 70%;
 }
