@@ -6,14 +6,13 @@ class Dashboard {
     this.date = JSON.stringify(new Date()).split('T')[0].split('"')[1].split('-').join('/');
     this.rooms = [];
     this.bookings = [];
-    this.roomsAvailableToday = [];
+    this.roomsBookedToday = [];
+    this.roomNumbers = [];
   }
 
   filterByDate(date) {
     this.rooms.forEach(room => {
-      console.log(room.number);
-      this.bookings.forEach(booking => {
-        if(room.number === booking.roomNumber && booking.date !== date) {
+        if(!this.roomNumbers.includes(room.number)) {
           $('.rooms_section').append(`
               <article class='rooms_section-card'>
                 <div>
@@ -22,7 +21,6 @@ class Dashboard {
               </article>
             `)
         }
-      })
     })
   }
 
@@ -32,7 +30,6 @@ class Dashboard {
 
   generateRooms(roomData) {
     this.rooms = roomData.rooms;
-    this.filterByDate(this.date);
   }
 
   getRooms() {
@@ -89,7 +86,11 @@ class Dashboard {
 
   generateBookings(bookingData) {
     this.bookings = bookingData.bookings;
+    this.roomsBookedToday = this.bookings.filter(booking =>
+      booking.date === this.date);
+    this.roomNumbers = this.roomsBookedToday.map(room => room.roomNumber);
     this.generateHTML(this.user);
+    this.filterByDate(this.date);
   }
 
   getBookings() {
