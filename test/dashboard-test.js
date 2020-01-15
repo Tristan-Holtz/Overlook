@@ -12,7 +12,7 @@ describe('Dashboard', () => {
 
   beforeEach(() => {
     customer = new Customer(1, "Leatha Ullrich");
-    manager = new Manager();
+    manager = new Manager([1, 2, 3, 4, 5]);
   });
 
   it('should be a function', () => {
@@ -20,5 +20,23 @@ describe('Dashboard', () => {
 
     expect(Dashboard).to.be.a('function');
   });
+
+  it('should be an instance of Dashboard', () => {
+    let dashboard = new Dashboard(cutomer);
+
+    expect(dashboard).to.be.an.instanceof(Dashboard);
+  })
+
+  it('should store the user', () => {
+    let dashboard = new Dashboard(cutomer);
+
+    expect(dashboard.user).to.deep.equal(customer);
+  })
+
+  it('should keep track of the date', () => {
+    let dashboard = new Dashboard(cutomer);
+
+    expect(dashboard.date).to.equal(JSON.stringify(new Date()).split('T')[0].split('"')[1].split('-').join('/'));
+  })
 
 });
