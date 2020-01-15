@@ -46,14 +46,12 @@ class Dashboard {
   generateRoomHTML(room) {
     $('.rooms_section').append(`
         <article class='rooms_section-card'>
-          <div class='room-card'>
-            <p>Room number ${room.number} is available</p>
-            <p>Cost: $${room.costPerNight}</p>
-            <p>Room-Type: ${room.roomType}</p>
-            <p>Beds: ${room.numBeds}</p>
-            <p>Bed-Size: ${room.bedSize}</p>
-            <p>Bidet: ${room.bidet}</p>
-          </div>
+          <p>Room number ${room.number} is available</p>
+          <p>Cost: $${room.costPerNight}</p>
+          <p>Room-Type: ${room.roomType}</p>
+          <p>Beds: ${room.numBeds}</p>
+          <p>Bed-Size: ${room.bedSize}</p>
+          <p>Bidet: ${room.bidet}</p>
         </article>
       `)
   }
@@ -98,21 +96,22 @@ class Dashboard {
     if(user.name === 'manager') {
       $('.main_dashboard').append(`
         <header class="main_header">
+          <h1>Overlook</h1>
         </header>
         <section class="manager_dashboard">
           <aside class="manager_dashboard-options">
             <form class="form_manager-options">
-              <label class="input_label">Customer Name:</label>
-              <input class="input_customer-name" placeholder="Enter customer name"></input>
-              <button type="button" class="input_customer-button">GO</button>
-              <label class="input_label">Room Type:</label>
-              <input class="input_room-type" placeholder="Enter room type"></input>
-              <button type="button" class="input_room-button">GO</button>
-              <label class="input_label">Date:</label>
-              <input class="input_date" placeholder="2020/01/16"></input>
-              <button type="button" class="input_date-button">GO</button>
+              <label class="input_label">Customer Name</label>
+              <input class="input_customer-name search" placeholder="Enter customer name"></input>
+              <button type="button" class="input_customer-button search-button">GO</button>
+              <label class="input_label">Room Type</label>
+              <input class="input_room-type search" placeholder="Enter room type"></input>
+              <button type="button" class="input_room-button search-button">GO</button>
+              <label class="input_label">Date</label>
+              <input class="input_date search" placeholder="YYYY/MM/DD"></input>
+              <button type="button" class="input_date-button search-button">GO</button>
             </form>
-            <section>
+            <section class="dashboard-stats">
               <div>
                 <h3>Total Rooms Available Today:</h3>
                 <p>${25 - this.roomsBookedToday.length}</p>
@@ -134,27 +133,30 @@ class Dashboard {
     } else {
       $('.main_dashboard').append(`
         <header class="main_header">
+          <h1>Overlook</h1>
         </header>
         <h2 class="welcome-message">Welcome back ${user.name}!</h2>
         <section class="customer_dashboard">
           <aside class="customer_dashboard-options">
             <h2>Book a new stay</h2>
             <form>
-              <label class="input_label">Room Type:</label>
-              <input class="input_room-type" placeholder="Enter room type"></input>
-              <button type="button" class="input_date-button">GO</button>
-              <label class="input_label">Date:</label>
-              <input class="input_date" placeholder="Enter date"></input>
-              <button type="button" class="input_room-button">GO</button>
+              <label class="input_label">Room Type</label>
+              <input class="input_room-type search" placeholder="Enter room type"></input>
+              <button type="button" class="input_date-button search-button">GO</button>
+              <label class="input_label">Date</label>
+              <input class="input_date search" placeholder="Enter date"></input>
+              <button type="button" class="input_room-button search-button">GO</button>
             </form>
-            <div>
-              <h3>Total Spent:</h3>
-              <p>$${Math.floor(this.totalSpent)}</p>
-            </div>
-            <div>
-              <h3>User Bookings</h3>
-              <p></p>
-            </div>
+            <section class="dashboard-stats">
+              <div>
+                <h3>Total Spent:</h3>
+                <p>$${Math.floor(this.totalSpent)}</p>
+              </div>
+              <div>
+                <h3>User Bookings</h3>
+                <p></p>
+              </div>
+            </section>
           </aside>
           <section class="rooms_section">
           </section>
