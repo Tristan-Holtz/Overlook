@@ -144,7 +144,7 @@ describe('Dashboard', () => {
     it('should reasign the rooms property', () => {
       let dashboard = new Dashboard(manager);
 
-      dashboard.generateRooms({roomData: {rooms: []});
+      dashboard.generateRooms({roomData: {rooms: []}});
       expect(dashboard.rooms).to.deep.equal([]);
     })
   })
