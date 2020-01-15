@@ -30,7 +30,6 @@ class Dashboard {
     this.customerBookings = this.bookings.filter(booking => {
       return booking.userID === user.id;
     })
-    console.log(this.customerBookings)
     this.resetTotalSpent(name);
     $('.rooms_section').empty();
     $('.rooms_section').append(`<h2>${user.name}</h2>`);
