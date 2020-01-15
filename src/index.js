@@ -65,6 +65,7 @@ const filterUser = () => {
 
 const makeBooking = (event) => {
   dashboard.user.bookRoom(event.target.value, dashboard.selectedDate, JSON.stringify(dashboard.userID));
+  event.target.parentNode.classList.add('hidden');
 }
 
 const deleteBooking = (event) => {
