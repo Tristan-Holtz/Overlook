@@ -1,21 +1,47 @@
 $login-font: 28px;
 
+html {
+  height: 100%;
+}
+
 body {
-  /* background: url("/images/login-background.jpg"); */
-  height: 100vh;
+  background: url("../images/login-background.jpg") no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  height: 100%;
+  margin: 0;
   width: 100%;
+}
+
+/********** HEADER **********/
+
+.main_header {
+  background: url("../images/banner.jpg") no-repeat center center fixed;
+}
+
+h1 {
+  font-family: "Pacifico";
+  font-size: 36px;
+  color: #FFF;
 }
 
 /********** LOGIN SECTION **********/
 
-.login-section {
-  border: 10px solid blue;
+.login-container {
+  border: 10px solid #FFF;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   height: 50vh;
-  margin: 15%;
   padding: 10%;
   width: 50%;
+}
+
+.login-section {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .user-info {
@@ -32,37 +58,41 @@ body {
 
 input {
   font-size: 28px;
-  height: 30%;
-  width: 90%;
+  height: 2rem;
+  width: 100%;
 }
 
 label {
+  color: #FFF;
   font-size: 28px;
+}
+
+.login-button {
+  font-size: 18px;
+  height: 2rem;
+  width: 100%;
 }
 
 /********** MANAGER DASHBOARD **********/
 
 .main_header {
   border-bottom: 5px solid black;
+  display: flex;
   height: 10vh;
+  justify-content: space-around;
   width: 100%;
 }
 
 .manager_dashboard {
   display: flex;
-  height: 90vh;
   width: 100%;
 }
 
 .manager_dashboard-options {
   border-right: 5px solid black;
-  height: 100vh;
+  overflow: auto;
   padding: 2%;
   width: 30%;
-}
-
-.hidden {
-  display: none;
 }
 
 .form_manager-options {
@@ -72,6 +102,95 @@ label {
 }
 
 .rooms_section {
+  background-color: rgba(255, 255, 255, 0.7);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+  margin-left: 5px solid black;
+  overflow: auto;
   padding: 1%;
   width: 70%;
+}
+
+.rooms_section-card {
+  background-color: #c7eef5;
+  border: 3px solid black;
+  border-radius: 3px;
+  height: 250px;
+  padding: 8px;
+}
+
+.dashboard_stats {
+  color: black;
+  > div {
+    font-size: 20px;
+    > p {
+      font-size: 24px;
+    }
+  }
+}
+
+.dashboard_stats-container {
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
+}
+
+/********** CUSTOMER DASHBOARD **********/
+
+.booking-message {
+  color: #FFF;
+}
+
+.customer_dashboard {
+  display: flex;
+  width: 100%;
+}
+
+.customer_dashboard-options {
+  border-right: 5px solid #FFF;
+  padding: 2%;
+  width: 30%;
+}
+
+.welcome-message {
+  border-bottom: 5px solid #FFF;
+  color: #FFF;
+}
+
+.search {
+  border-radius: 0 5px 5px 5px;
+  border: none;
+  height: 2rem;
+  margin-bottom: 8px;
+  padding: 5px 10px;
+  width: 93%;
+}
+
+.hidden {
+  display: none;
+}
+
+.input_label {
+  background-color: #1B1B23;
+  border-radius: 4px 4px 0 0;
+  color: #FFF;
+  font-size: 16px;
+  padding: 4px 8px;
+  width: 150px;
+  &:not(:first-of-type) {
+    margin-top: 16px;
+  }
+}
+
+.search-button {
+  background-color: #006DAA;
+  border-radius: 5px;
+  color: #FFF;
+  font-weight: 650;
+  font-size: 16px;
+  padding: 8px 16px;
+}
+
+.width {
+  width: 100%;
 }

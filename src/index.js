@@ -9,10 +9,11 @@ let dashboard;
 
 const generateUser = (info) => {
   if($('.login-username').val() === 'manager') {
-    const manager = new Manager(info);
+    const manager = new Manager(info.users);
     dashboard = new Dashboard(manager);
     $('.error-message').hide();
     $('.login-section').hide();
+    $('main').addClass('width');
     dashboard.getRooms();
     dashboard.getBookings();
   } else {
@@ -57,6 +58,17 @@ const filterRoom = () => {
   dashboard.filterByRoom($('.input_room-type').val());
 }
 
+const filterUser = () => {
+  dashboard.filterByUser($('.input_customer-name').val().split(' ').join(' '));
+  console.log($('.input_customer-name').val().split(' ').join(' '))
+}
+
+const makeBooking = () => {
+  dashboard.user.bookRoom($('.book-button').val(), dashboard.selectedDate, JSON.stringify(dashboard.userID));
+}
+
 $('.login-button').click(checkPassword);
 $(document).on("click", '.input_date-button', filterDate);
 $(document).on("click", '.input_room-button', filterRoom);
+$(document).on("click", '.input_customer-button', filterUser);
+$(document).on("click", '.book-button', makeBooking);
