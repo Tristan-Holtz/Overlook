@@ -21,6 +21,7 @@ const generateUser = (info) => {
     const customerInfo = info.users.find(user => user.id === loginInput)
     const customer = new Customer(customerInfo.id, customerInfo.name);
     dashboard = new Dashboard(customer);
+    $('main').addClass('width');
     $('.error-message').hide();
     $('.login-section').hide();
     dashboard.getRooms();
@@ -71,4 +72,5 @@ $('.login-button').click(checkPassword);
 $(document).on("click", '.input_date-button', filterDate);
 $(document).on("click", '.input_room-button', filterRoom);
 $(document).on("click", '.input_customer-button', filterUser);
-$(document).on("click", '.book-button', makeBooking);
+// $(document).on("click", '.book-button', makeBooking);
+$('.book-button').bind("click", { key1: event }, makeBooking)

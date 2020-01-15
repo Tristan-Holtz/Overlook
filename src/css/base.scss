@@ -76,7 +76,7 @@ label {
 /********** MANAGER DASHBOARD **********/
 
 .main_header {
-  border-bottom: 5px solid black;
+  border-bottom: 5px solid #FFF;
   display: flex;
   height: 10vh;
   justify-content: space-around;
@@ -89,7 +89,7 @@ label {
 }
 
 .manager_dashboard-options {
-  border-right: 5px solid black;
+  border-right: 5px solid #FFF;
   overflow: auto;
   padding: 2%;
   width: 30%;
@@ -148,6 +148,7 @@ label {
 
 .customer_dashboard-options {
   border-right: 5px solid #FFF;
+  overflow: auto;
   padding: 2%;
   width: 30%;
 }
