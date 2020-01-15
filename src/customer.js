@@ -4,12 +4,16 @@ class Customer {
     this.id = id;
   }
 
-  selectDate() {
-
-  }
-
-  bookRoom() {
-
+  bookRoom(room, date, id) {
+    fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings", {
+    method: "POST",
+    headers: {"Content-Type": "Application/JSON"},
+    body: JSON.stringify({
+      userID: id,
+      date: date,
+      roomNumber: room
+      })
+    })
   }
 }
 
