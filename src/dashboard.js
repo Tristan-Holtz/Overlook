@@ -1,5 +1,4 @@
 import $ from 'jquery';
-
 class Dashboard {
   constructor(user) {
     this.user = user;
@@ -15,7 +14,6 @@ class Dashboard {
     this.selectedDate = JSON.stringify(new Date()).split('T')[0].split('"')[1].split('-').join('/');
     this.userID = user.id || 0;
   }
-
   resetTotalSpent(name) {
     this.totalSpent = Math.floor(this.customerBookings.reduce((sum, booking) => {
       this.rooms.forEach(room => {
@@ -26,7 +24,6 @@ class Dashboard {
       return sum;
     }, 0))
   }
-
   filterByUser(name) {
     let user = this.user.customerDetails.find(customer => customer.name === name)
     this.userID = user.id;
@@ -45,7 +42,6 @@ class Dashboard {
         `);
     })
   }
-
   generateRoomHTML(room) {
     $('.rooms_section').append(`
         <article class='rooms_section-card'>
@@ -59,7 +55,6 @@ class Dashboard {
         </article>
       `)
   }
-
   filterByDate(date) {
     this.selectedDate = date;
     $('.rooms_section').empty();
@@ -75,7 +70,6 @@ class Dashboard {
       }
     })
   }
-
   filterByRoom(type) {
     $('.rooms_section').empty();
     let currentRooms = this.roomsAvailableToday.filter(room => {
@@ -85,26 +79,23 @@ class Dashboard {
       this.generateRoomHTML(room);
     })
   }
-
   generateRooms(roomData) {
     this.rooms = roomData.rooms;
   }
-
   getRooms() {
     fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms")
       .then(response => response.json())
       .then(data => this.generateRooms(data))
       .catch(error => console.log(error))
   }
-
   generateHTML(user) {
     if(user.name === 'manager') {
       $('.main_dashboard').append(`
         <header class="main_header">
           <h1>Overlook</h1>
         </header>
-        <section class="manager_dashboard">
-          <aside class="manager_dashboard-options">
+        <section class="dashboard">
+          <aside class="dashboard-options">
             <form class="form_manager-options">
               <label class="input_label">Customer Name</label>
               <input class="input_customer-name search" placeholder="Enter customer name"></input>
@@ -141,8 +132,8 @@ class Dashboard {
           <h1>Overlook</h1>
         </header>
         <h2 class="welcome-message">Welcome back ${user.name}!</h2>
-        <section class="customer_dashboard">
-          <aside class="customer_dashboard-options">
+        <section class="dashboard">
+          <aside class="dashboard-options">
             <h2 class="booking-message">Book a new stay</h2>
             <form>
               <label class="input_label">Room Type</label>
@@ -176,7 +167,6 @@ class Dashboard {
         })
     }
   }
-
   generateBookings(bookingData) {
     this.bookings = bookingData.bookings;
     this.roomsBookedToday = this.bookings.filter(booking =>
@@ -201,14 +191,11 @@ class Dashboard {
     this.generateHTML(this.user);
     this.filterByDate(this.date);
   }
-
   getBookings() {
     fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings")
       .then(response => response.json())
       .then(data => this.generateBookings(data))
       .catch(error => console.log(error))
   }
-
 }
-
 export default Dashboard;
