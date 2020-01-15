@@ -12,9 +12,11 @@ class Dashboard {
     this.totalSpent = 0;
     this.roomsAvailableToday = [];
     this.customerBookings = [];
+    this.selectedDate = JSON.stringify(new Date()).split('T')[0].split('"')[1].split('-').join('/');
+    this.userID = user.id || 0;
   }
 
-  resetTotalSent(name) {
+  resetTotalSpent(name) {
     this.totalSpent = Math.floor(this.customerBookings.reduce((sum, booking) => {
       this.rooms.forEach(room => {
         if(room.number === booking.roomNumber) {
@@ -27,10 +29,11 @@ class Dashboard {
 
   filterByUser(name) {
     let user = this.user.customerDetails.find(customer => customer.name === name)
+    this.userID = user.id;
     this.customerBookings = this.bookings.filter(booking => {
       return booking.userID === user.id;
     })
-    this.resetTotalSent(name);
+    this.resetTotalSpent(name);
     $('.rooms_section').empty();
     $('.rooms_section').append(`<h2>${user.name}</h2>`);
     $('.rooms_section').append(`<h2>Has spent a total of: $${this.totalSpent}</h2>`);
@@ -52,11 +55,13 @@ class Dashboard {
           <p>Beds: ${room.numBeds}</p>
           <p>Bed-Size: ${room.bedSize}</p>
           <p>Bidet: ${room.bidet}</p>
+          <button type="button" value="${room.number}" class="book-button">BOOK</button>
         </article>
       `)
   }
 
   filterByDate(date) {
+    this.selectedDate = date;
     $('.rooms_section').empty();
     this.roomsAvailableToday = [];
     if(date !== this.date) {
@@ -111,16 +116,16 @@ class Dashboard {
               <input class="input_date search" placeholder="YYYY/MM/DD"></input>
               <button type="button" class="input_date-button search-button">GO</button>
             </form>
-            <section class="dashboard-stats">
-              <div>
+            <section class="dashboard_stats">
+              <div class="dashboard_stats-container">
                 <h3>Total Rooms Available Today:</h3>
                 <p>${25 - this.roomsBookedToday.length}</p>
               </div>
-              <div>
+              <div class="dashboard_stats-container">
                 <h3>Percentage of Total Occupancy:</h3>
                 <p>${(this.roomsBookedToday.length / 25) * 100}%</p>
               </div>
-              <div>
+              <div class="dashboard_stats-container">
                 <h3>Total Revenue for Today:</h3>
                 <p>$${Math.floor(this.totalRevenueToday)}</p>
               </div>
@@ -138,23 +143,23 @@ class Dashboard {
         <h2 class="welcome-message">Welcome back ${user.name}!</h2>
         <section class="customer_dashboard">
           <aside class="customer_dashboard-options">
-            <h2>Book a new stay</h2>
+            <h2 class="booking-message">Book a new stay</h2>
             <form>
               <label class="input_label">Room Type</label>
               <input class="input_room-type search" placeholder="Enter room type"></input>
-              <button type="button" class="input_date-button search-button">GO</button>
-              <label class="input_label">Date</label>
-              <input class="input_date search" placeholder="Enter date"></input>
               <button type="button" class="input_room-button search-button">GO</button>
+              <label class="input_label">Date</label>
+              <input class="input_date search" placeholder="YYYY/MM/DD"></input>
+              <button type="button" class="input_date-button search-button">GO</button>
             </form>
-            <section class="dashboard-stats">
-              <div>
+            <section class="dashboard_stats">
+              <div class="dashboard_stats-container">
                 <h3>Total Spent:</h3>
                 <p>$${Math.floor(this.totalSpent)}</p>
               </div>
-              <div>
+              <div class="dashboard_stats-container">
                 <h3>User Bookings</h3>
-                <p></p>
+                <p class="user-bookings"></p>
               </div>
             </section>
           </aside>
@@ -162,6 +167,13 @@ class Dashboard {
           </section>
         </section>
         `)
+        this.customerBookings.forEach(booking => {
+          $('.dashboard_stats-container').append(`
+              <section>
+                <p>On ${booking.date} room number ${booking.roomNumber} was booked.</p>
+              </section>
+            `);
+        })
     }
   }
 
