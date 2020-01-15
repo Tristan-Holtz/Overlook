@@ -16,7 +16,13 @@ body {
 /********** HEADER **********/
 
 .main_header {
-  background: url("../images/login-background.jpg") no-repeat center center fixed;
+  background: url("../images/banner.jpg") no-repeat center center fixed;
+}
+
+h1 {
+  font-family: "Pacifico";
+  font-size: 36px;
+  color: #FFF;
 }
 
 /********** LOGIN SECTION **********/
@@ -62,6 +68,7 @@ label {
 }
 
 .login-button {
+  font-size: 18px;
   height: 2rem;
   width: 100%;
 }
@@ -113,8 +120,8 @@ label {
   padding: 8px;
 }
 
-.dashboard-stats {
-  color: #FFF;
+.dashboard_stats {
+  color: black;
   > div {
     font-size: 20px;
     > p {
@@ -123,7 +130,16 @@ label {
   }
 }
 
+.dashboard_stats-container {
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
+}
+
 /********** CUSTOMER DASHBOARD **********/
+
+.booking-message {
+  color: #FFF;
+}
 
 .customer_dashboard {
   display: flex;
