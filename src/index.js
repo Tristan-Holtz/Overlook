@@ -69,7 +69,8 @@ const makeBooking = (event) => {
 
 const deleteBooking = (event) => {
   dashboard.user.deleteBooking(event.target.value);
-  
+  console.log(event.target.parentNode);
+  event.target.parentNode.classList.add('hidden');
 }
 
 $('.login-button').click(checkPassword);
