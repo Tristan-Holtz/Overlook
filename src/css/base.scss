@@ -69,6 +69,7 @@ label {
 }
 
 .login-button {
+  background-color: #FFF;
   font-size: 18px;
   height: 2rem;
   width: 100%;
@@ -165,6 +166,10 @@ label {
   width: 93%;
 }
 
+.bookings {
+  width: 100%;
+}
+
 .hidden {
   display: none;
 }
@@ -194,4 +199,9 @@ label {
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+
+@media only screen and (max-width: 800px) {
+
+
 }
