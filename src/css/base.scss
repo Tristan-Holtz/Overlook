@@ -30,7 +30,7 @@ h1 {
 
 .login-container {
   border: 10px solid #FFF;
-  border-radius: 5px;
+  border-radius: 150px;
   display: flex;
   flex-direction: column;
   height: 50vh;
@@ -52,6 +52,8 @@ h1 {
 }
 
 .error-message {
+  background-color: grey;
+  border-radius: 5px;
   color: red;
   font-size: $login-font;
   margin: 1%;
