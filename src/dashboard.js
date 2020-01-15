@@ -74,11 +74,18 @@ class Dashboard {
     })
   }
 
+  displayApology() {
+    $('.rooms_section').append(`<p class="apology-message">Sorry, but there aren't any rooms, try changing your search.</p>`)
+  }
+
   filterByRoom(type) {
     $('.rooms_section').empty();
     let currentRooms = this.roomsAvailableToday.filter(room => {
       return room.roomType === type});
     this.roomsAvailableToday = currentRooms;
+    if(this.roomsAvailableToday.length <= 0) {
+      displayApology();
+    }
     currentRooms.forEach(room => {
       this.generateRoomHTML(room);
     })
