@@ -9,7 +9,7 @@ let dashboard;
 
 const generateUser = (info) => {
   if($('.login-username').val() === 'manager') {
-    const manager = new Manager(info);
+    const manager = new Manager(info.users);
     dashboard = new Dashboard(manager);
     $('.error-message').hide();
     $('.login-section').hide();
@@ -57,6 +57,12 @@ const filterRoom = () => {
   dashboard.filterByRoom($('.input_room-type').val());
 }
 
+const filterUser = () => {
+  dashboard.filterByUser($('.input_customer-name').val().split(' ').join(' '));
+  console.log($('.input_customer-name').val().split(' ').join(' '))
+}
+
 $('.login-button').click(checkPassword);
 $(document).on("click", '.input_date-button', filterDate);
 $(document).on("click", '.input_room-button', filterRoom);
+$(document).on("click", '.input_customer-button', filterUser);
