@@ -99,14 +99,14 @@ class Dashboard {
         <section class="dashboard">
           <aside class="dashboard-options">
             <form class="form_options">
-              <label class="input_label">Customer Name</label>
-              <input class="input_customer-name search" placeholder="Enter customer name"></input>
+              <label for="customer input" class="input_label">Customer Name</label>
+              <input name="customer input" class="input_customer-name search" placeholder="Enter customer name"></input>
               <button type="button" class="input_customer-button search-button">GO</button>
-              <label class="input_label">Room Type</label>
-              <input class="input_room-type search" placeholder="Enter room type"></input>
+              <label for="room type" class="input_label">Room Type</label>
+              <input name="room type" class="input_room-type search" placeholder="Enter room type"></input>
               <button type="button" class="input_room-button search-button">GO</button>
-              <label class="input_label">Date</label>
-              <input class="input_date search" placeholder="YYYY/MM/DD"></input>
+              <label for="date" class="input_label">Date</label>
+              <input name="date" class="input_date search" placeholder="YYYY/MM/DD"></input>
               <button type="button" class="input_date-button search-button">GO</button>
             </form>
             <section class="dashboard_stats">
@@ -138,11 +138,11 @@ class Dashboard {
           <aside class="dashboard-options">
             <h2 class="booking-message">Book a new stay</h2>
             <form class="form_options">
-              <label class="input_label">Room Type</label>
-              <input class="input_room-type search" placeholder="Enter room type"></input>
+              <label for="room type" class="input_label">Room Type</label>
+              <input name="room type" class="input_room-type search" placeholder="Enter room type"></input>
               <button type="button" class="input_room-button search-button">GO</button>
-              <label class="input_label">Date</label>
-              <input class="input_date search" placeholder="YYYY/MM/DD"></input>
+              <label for="date" class="input_label">Date</label>
+              <input name="date" class="input_date search" placeholder="YYYY/MM/DD"></input>
               <button type="button" class="input_date-button search-button">GO</button>
             </form>
             <section class="dashboard_stats">
@@ -161,7 +161,7 @@ class Dashboard {
         `)
         this.customerBookings.forEach(booking => {
           $('.dashboard_stats-container').append(`
-              <section>
+              <section class="bookings">
                 <p>On ${booking.date} room number ${booking.roomNumber} was booked.</p>
               </section>
             `);
