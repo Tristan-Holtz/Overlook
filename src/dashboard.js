@@ -152,7 +152,6 @@ class Dashboard {
               </div>
               <div class="dashboard_stats-container">
                 <h3>User Bookings</h3>
-                <p class="user-bookings"></p>
               </div>
             </section>
           </aside>
