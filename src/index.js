@@ -63,7 +63,12 @@ const filterUser = () => {
   console.log($('.input_customer-name').val().split(' ').join(' '))
 }
 
+const makeBooking = () => {
+  dashboard.user.bookRoom($('.book-button').val(), dashboard.selectedDate, JSON.stringify(dashboard.userID));
+}
+
 $('.login-button').click(checkPassword);
 $(document).on("click", '.input_date-button', filterDate);
 $(document).on("click", '.input_room-button', filterRoom);
 $(document).on("click", '.input_customer-button', filterUser);
+$(document).on("click", '.book-button', makeBooking);
