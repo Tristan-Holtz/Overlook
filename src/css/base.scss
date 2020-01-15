@@ -29,7 +29,7 @@ h1 {
 /********** LOGIN SECTION **********/
 
 .login-container {
-  border: 10px solid #FFF;
+  border: 15px double #FFF;
   border-radius: 150px;
   display: flex;
   flex-direction: column;
@@ -168,10 +168,6 @@ label {
   margin-bottom: 8px;
   padding: 5px 10px;
   width: 93%;
-}
-
-.bookings {
-  width: 100%;
 }
 
 .hidden {
