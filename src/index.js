@@ -15,7 +15,6 @@ const generateUser = (info) => {
     $('.login-section').hide();
     dashboard.getRooms();
     dashboard.getBookings();
-    console.log(manager);
   } else {
     const loginInput = parseInt($('.login-username').val().split('customer')[1]);
     const customerInfo = info.users.find(user => user.id === loginInput)
@@ -25,7 +24,6 @@ const generateUser = (info) => {
     $('.login-section').hide();
     dashboard.getRooms();
     dashboard.getBookings();
-    console.log(customer);
   }
 }
 
@@ -51,6 +49,14 @@ const checkPassword = () => {
   }
 }
 
+const filterDate = () => {
+  dashboard.filterByDate($('.input_date').val());
+}
+
+const filterRoom = () => {
+  dashboard.filterByRoom($('.input_room-type').val());
+}
 
 $('.login-button').click(checkPassword);
-$('.input_date-button').click(dashboard.filterByDate())
+$(document).on("click", '.input_date-button', filterDate);
+$(document).on("click", '.input_room-button', filterRoom);
