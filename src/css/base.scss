@@ -10,6 +10,7 @@ body {
   display: flex;
   height: 100%;
   margin: 0;
+  overflow: hidden;
   width: 100%;
 }
 
@@ -73,26 +74,29 @@ label {
   width: 100%;
 }
 
-/********** MANAGER DASHBOARD **********/
+/********** DASHBOARD ******************/
 
-.main_header {
-  border-bottom: 5px solid black;
+.dashboard {
   display: flex;
-  height: 10vh;
-  justify-content: space-around;
+  flex: 1;
+  height: 100%;
   width: 100%;
 }
 
-.manager_dashboard {
-  display: flex;
-  width: 100%;
-}
-
-.manager_dashboard-options {
-  border-right: 5px solid black;
+.dashboard-options {
+  border-right: 5px solid #FFF;
   overflow: auto;
   padding: 2%;
   width: 30%;
+}
+
+/********** MANAGER DASHBOARD **********/
+
+.main_header {
+  border-bottom: 5px solid #FFF;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
 }
 
 .form_manager-options {
@@ -141,11 +145,6 @@ label {
   color: #FFF;
 }
 
-.customer_dashboard {
-  display: flex;
-  width: 100%;
-}
-
 .customer_dashboard-options {
   border-right: 5px solid #FFF;
   padding: 2%;
@@ -192,5 +191,7 @@ label {
 }
 
 .width {
+  display: flex;
+  flex-direction: column;
   width: 100%;
 }
