@@ -47,6 +47,60 @@ describe('Dashboard', () => {
     expect(dashboard.userID).to.equal(1);
   })
 
+  it('should start rooms property as an empty array', () => {
+    let dashboard = new Dashboard(cutomer);
+
+    expect(dashboard.rooms).to.deep.equal([]);
+  })
+
+  it('should start bookings property as an empty array', () => {
+    let dashboard = new Dashboard(cutomer);
+
+    expect(dashboard.bookings).to.deep.equal([]);
+  })
+
+  it('should start roomsBookedToday property as an empty array', () => {
+    let dashboard = new Dashboard(cutomer);
+
+    expect(dashboard.roomsBookedToday).to.deep.equal([]);
+  })
+
+  it('should start roomNumbers property as an empty array', () => {
+    let dashboard = new Dashboard(cutomer);
+
+    expect(dashboard.roomNumbers).to.deep.equal([]);
+  })
+
+  it('should start roomsAvailableToday property as an empty array', () => {
+    let dashboard = new Dashboard(cutomer);
+
+    expect(dashboard.roomsAvailableToday).to.deep.equal([]);
+  })
+
+  it('should start customerBookings property as an empty array', () => {
+    let dashboard = new Dashboard(cutomer);
+
+    expect(dashboard.customerBookings).to.deep.equal([]);
+  })
+
+  it('should start totalRevenueToday property as an empty array', () => {
+    let dashboard = new Dashboard(cutomer);
+
+    expect(dashboard.totalRevenueToday).to.equal(0);
+  })
+
+  it('should start totalSpent property as an empty array', () => {
+    let dashboard = new Dashboard(cutomer);
+
+    expect(dashboard.totalSpent).to.equal(0);
+  })
+
+  it('should keep track of the date selected', () => {
+    let dashboard = new Dashboard(cutomer);
+
+    expect(dashboard.selectedDate).to.equal(JSON.stringify(new Date()).split('T')[0].split('"')[1].split('-').join('/'));
+  })
+
   describe('generateHTML', () => {
     it('should be a function', () => {
       let dashboard = new Dashboard(cutomer);
