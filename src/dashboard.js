@@ -14,6 +14,7 @@ class Dashboard {
     this.selectedDate = JSON.stringify(new Date()).split('T')[0].split('"')[1].split('-').join('/');
     this.userID = user.id || 0;
   }
+
   resetTotalSpent(name) {
     this.totalSpent = Math.floor(this.customerBookings.reduce((sum, booking) => {
       this.rooms.forEach(room => {
@@ -24,12 +25,11 @@ class Dashboard {
       return sum;
     }, 0))
   }
+
   filterByUser(name) {
     let user = this.user.customerDetails.find(customer => customer.name === name)
     this.userID = user.id;
-    this.customerBookings = this.bookings.filter(booking => {
-      return booking.userID === user.id;
-    })
+    this.customerBookings = this.bookings.filter(booking => booking.userID === user.id)
     this.resetTotalSpent(name);
     $('.rooms_section').empty();
     $('.rooms_section').append(`<h2>${user.name}</h2>`);
@@ -43,6 +43,7 @@ class Dashboard {
         `);
     })
   }
+
   generateRoomHTML(room) {
     $('.rooms_section').append(`
         <article class='rooms_section-card'>
@@ -56,6 +57,7 @@ class Dashboard {
         </article>
       `)
   }
+
   filterByDate(date) {
     this.selectedDate = date;
     $('.rooms_section').empty();
@@ -71,26 +73,48 @@ class Dashboard {
       }
     })
   }
+
+  displayApology() {
+    $('.rooms_section').append(`<p class="apology-message">Sorry, but there aren't any rooms, try changing your search.</p>`)
+  }
+
   filterByRoom(type) {
     $('.rooms_section').empty();
     let currentRooms = this.roomsAvailableToday.filter(room => {
       return room.roomType === type});
     this.roomsAvailableToday = currentRooms;
+    if(this.roomsAvailableToday.length <= 0) {
+      displayApology();
+    }
     currentRooms.forEach(room => {
       this.generateRoomHTML(room);
     })
   }
+
   generateRooms(roomData) {
     this.rooms = roomData.rooms;
   }
+
   getRooms() {
     fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms")
       .then(response => response.json())
       .then(data => this.generateRooms(data))
       .catch(error => console.log(error))
   }
+
+  addCustomerBookings() {
+    this.customerBookings.forEach(booking => {
+      $('.bookings-container').append(`
+          <section class="bookings">
+            <p>On ${booking.date} room number ${booking.roomNumber} was booked.</p>
+          </section>
+        `);
+    })
+  }
+
   generateHTML(user) {
     if(user.name === 'manager') {
+      console.log()
       $('.main_dashboard').append(`
         <header class="main_header">
           <h1>Overlook</h1>
@@ -149,7 +173,7 @@ class Dashboard {
                 <h3>Total Spent:</h3>
                 <p>$${Math.floor(this.totalSpent)}</p>
               </div>
-              <div class="dashboard_stats-container">
+              <div class="dashboard_stats-container bookings-container">
                 <h3>User Bookings</h3>
               </div>
             </section>
@@ -158,15 +182,11 @@ class Dashboard {
           </section>
         </section>
         `)
-        this.customerBookings.forEach(booking => {
-          $('.dashboard_stats-container').append(`
-              <section class="bookings">
-                <p>On ${booking.date} room number ${booking.roomNumber} was booked.</p>
-              </section>
-            `);
-        })
+        this.customerBookings = this.bookings.filter(booking => booking.userID === user.id).sort((a, b) => {return a - b});
+        this.addCustomerBookings(this.customerBookings);
     }
   }
+
   generateBookings(bookingData) {
     this.bookings = bookingData.bookings;
     this.roomsBookedToday = this.bookings.filter(booking =>
@@ -191,6 +211,7 @@ class Dashboard {
     this.generateHTML(this.user);
     this.filterByDate(this.date);
   }
+
   getBookings() {
     fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings")
       .then(response => response.json())
