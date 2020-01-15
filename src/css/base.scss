@@ -203,5 +203,17 @@ label {
 
 @media only screen and (max-width: 800px) {
 
+  .dashboard {
+    flex-direction: column;
+  }
+
+  .dashboard-options {
+    width: 100%;
+  }
+
+  .rooms_section {
+    grid-template-columns: 1fr;
+    width: 100%
+  }
 
 }
