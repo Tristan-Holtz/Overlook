@@ -21,9 +21,9 @@ const generateUser = (info) => {
     const customerInfo = info.users.find(user => user.id === loginInput)
     const customer = new Customer(customerInfo.id, customerInfo.name);
     dashboard = new Dashboard(customer);
-    $('main').addClass('width');
     $('.error-message').hide();
     $('.login-section').hide();
+    $('main').addClass('width');
     dashboard.getRooms();
     dashboard.getBookings();
   }
@@ -61,16 +61,21 @@ const filterRoom = () => {
 
 const filterUser = () => {
   dashboard.filterByUser($('.input_customer-name').val().split(' ').join(' '));
-  console.log($('.input_customer-name').val().split(' ').join(' '))
 }
 
-const makeBooking = () => {
-  dashboard.user.bookRoom($('.book-button').val(), dashboard.selectedDate, JSON.stringify(dashboard.userID));
+const makeBooking = (event) => {
+  dashboard.user.bookRoom(event.target.value, dashboard.selectedDate, JSON.stringify(dashboard.userID));
+}
+
+const deleteBooking = (event) => {
+  dashboard.user.deleteBooking(event.target.value);
+  console.log(event.target.parentNode);
+  event.target.parentNode.classList.add('hidden');
 }
 
 $('.login-button').click(checkPassword);
 $(document).on("click", '.input_date-button', filterDate);
 $(document).on("click", '.input_room-button', filterRoom);
 $(document).on("click", '.input_customer-button', filterUser);
-// $(document).on("click", '.book-button', makeBooking);
-$('.book-button').bind("click", { key1: event }, makeBooking)
+$(document).on("click", '.book-button', makeBooking);
+$(document).on("click", '.delete-button', deleteBooking);
