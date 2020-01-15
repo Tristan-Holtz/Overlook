@@ -13,6 +13,7 @@ const generateUser = (info) => {
     dashboard = new Dashboard(manager);
     $('.error-message').hide();
     $('.login-section').hide();
+    $('main').addClass('width');
     dashboard.getRooms();
     dashboard.getBookings();
   } else {
